@@ -46,7 +46,7 @@ export const Calculator = () => {
   };
 
   const getSelectedSign = (id) => {
-    if(id === 5) {
+    if (id === 5) {
       selectNumber(0);
     }
     if (typeof selectedNumbers === "number") {
@@ -102,9 +102,13 @@ export const Calculator = () => {
 
   return (
     <div className={Styles.cover}>
+      <h1 data-testid="calculator">Calculator</h1>
+
       <div className={Styles.wrapper}>
         {numbers.map((number, index) => (
           <div
+            role="definition"
+            data-testid={number.id}
             key={index}
             className={`${Styles.box} ${
               selectedNumber === number.id && Styles.active
@@ -117,6 +121,7 @@ export const Calculator = () => {
         {signs.map((number, index) => (
           <div
             key={index}
+            data-testid={number.value}
             className={Styles.box}
             onClick={() => getSelectedSign(number.id)}
           >
@@ -124,12 +129,15 @@ export const Calculator = () => {
           </div>
         ))}
         <div
+          data-testid="calculate"
           className={Styles.box}
           onClick={() => setSecondAddition(Number(selectedNumbers.join("")))}
         >
           =
         </div>
-        <div className={Styles.box1}>{selectedNumbers}</div>
+        <div className={Styles.box1} data-testid="display">
+          {selectedNumbers}
+        </div>
       </div>
     </div>
   );
